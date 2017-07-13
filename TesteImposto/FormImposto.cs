@@ -61,8 +61,15 @@ namespace TesteImposto
                     });
             }
 
-            service.GerarNotaFiscal(pedido);
-            MessageBox.Show("Operação efetuada com sucesso");
+            try
+            {
+                service.GerarNotaFiscal(pedido);
+                MessageBox.Show("Operação efetuada com sucesso");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Imposto.Core.Service
 {
     public class NotaFiscalService
     {
-        public void GerarNotaFiscal(Domain.Pedido pedido)
+        public void GerarNotaFiscal(Pedido pedido)
         {
             NotaFiscal notaFiscal = new NotaFiscal();
             notaFiscal.EmitirNotaFiscal(pedido);
@@ -16,10 +16,13 @@ namespace Imposto.Core.Service
 
         private void GravarNotaFiscal(NotaFiscal notaFiscal)
         {
-            String path = "" + notaFiscal.NumeroNotaFiscal + ".xml";
+            String path = Environment.GetEnvironmentVariable("pathXml");
+            if (string.Equals(path, null))
+                throw new Exception("Não foi configurado o path para gravar o XML da nota.");
+
 
             XmlSerializer xmlNota = new XmlSerializer(typeof(NotaFiscal));
-            StreamWriter arquivo = new StreamWriter(path);
+            StreamWriter arquivo = new StreamWriter(path + notaFiscal.Serie + ".xml");
             xmlNota.Serialize(arquivo, notaFiscal);
             arquivo.Close();
         }

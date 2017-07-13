@@ -1,10 +1,12 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace Imposto.Core.Domain
 {
     [XmlRoot]
     public class NotaFiscalItem
     {
+        [XmlIgnore]
         public int Id { get; set; }
         public int IdNotaFiscal { get; set; }
         public string Cfop { get; set; }

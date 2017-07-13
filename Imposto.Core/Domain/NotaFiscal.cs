@@ -7,6 +7,7 @@ namespace Imposto.Core.Domain
     [XmlRoot]
     public class NotaFiscal
     {
+        [XmlIgnore]
         public int Id { get; set; }
         public int NumeroNotaFiscal { get; set; }
         public int Serie { get; set; }

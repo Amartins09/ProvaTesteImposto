@@ -15,7 +15,7 @@ SET NOCOUNT ON
 GO 
 CREATE PROCEDURE P_NOTA_FISCAL_ITEM
 (
-	@pId int,
+	@pId int OUTPUT,
     @pIdNotaFiscal int,
     @pCfop varchar(5),
     @pTipoIcms varchar(20),
@@ -27,7 +27,7 @@ CREATE PROCEDURE P_NOTA_FISCAL_ITEM
 )
 AS
 BEGIN
-	IF (@pId = 0)
+	IF (ISNULL(@pId,0) = 0)
 	BEGIN 		
 		INSERT INTO [dbo].[NotaFiscalItem]
            ([IdNotaFiscal]

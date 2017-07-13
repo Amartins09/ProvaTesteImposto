@@ -1,12 +1,6 @@
 ﻿using Imposto.Core.Service;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Imposto.Core.Domain;
 
@@ -67,8 +61,15 @@ namespace TesteImposto
                     });
             }
 
-            service.GerarNotaFiscal(pedido);
-            MessageBox.Show("Operação efetuada com sucesso");
+            try
+            {
+                service.GerarNotaFiscal(pedido);
+                MessageBox.Show("Operação efetuada com sucesso");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }

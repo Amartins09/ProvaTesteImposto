@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Imposto.Core.Domain
 {
+    [XmlRoot]
     public class NotaFiscal
     {
         public int Id { get; set; }
@@ -17,7 +15,8 @@ namespace Imposto.Core.Domain
         public string EstadoDestino { get; set; }
         public string EstadoOrigem { get; set; }
 
-        public IEnumerable<NotaFiscalItem> ItensDaNotaFiscal { get; set; }
+        [XmlElement]
+        public List<NotaFiscalItem> ItensDaNotaFiscal { get; set; }
 
         public NotaFiscal()
         {
@@ -152,6 +151,8 @@ namespace Imposto.Core.Domain
                 }
                 notaFiscalItem.NomeProduto = itemPedido.NomeProduto;
                 notaFiscalItem.CodigoProduto = itemPedido.CodigoProduto;
+
+                ItensDaNotaFiscal.Add(notaFiscalItem);
             }            
         }
     }

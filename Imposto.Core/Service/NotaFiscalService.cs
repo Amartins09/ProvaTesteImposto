@@ -1,4 +1,7 @@
-﻿using Imposto.Core.Domain;
+﻿using System;
+using System.IO;
+using System.Xml.Serialization;
+using Imposto.Core.Domain;
 
 namespace Imposto.Core.Service
 {
@@ -8,6 +11,17 @@ namespace Imposto.Core.Service
         {
             NotaFiscal notaFiscal = new NotaFiscal();
             notaFiscal.EmitirNotaFiscal(pedido);
+            GravarNotaFiscal(notaFiscal);
+        }
+
+        private void GravarNotaFiscal(NotaFiscal notaFiscal)
+        {
+            String path = "" + notaFiscal.NumeroNotaFiscal + ".xml";
+
+            XmlSerializer xmlNota = new XmlSerializer(typeof(NotaFiscal));
+            StreamWriter arquivo = new StreamWriter(path);
+            xmlNota.Serialize(arquivo, notaFiscal);
+            arquivo.Close();
         }
     }
 }

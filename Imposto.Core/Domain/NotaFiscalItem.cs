@@ -1,5 +1,8 @@
-﻿namespace Imposto.Core.Domain
+﻿using System.Xml.Serialization;
+
+namespace Imposto.Core.Domain
 {
+    [XmlRoot]
     public class NotaFiscalItem
     {
         public int Id { get; set; }

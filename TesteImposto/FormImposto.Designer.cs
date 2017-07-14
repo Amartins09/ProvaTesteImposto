@@ -106,30 +106,31 @@
             // 
             this.cmbEstadoOrigem.FormattingEnabled = true;
             this.cmbEstadoOrigem.Items.AddRange(new object[] {
-            "SP",
-            "MG"});
+            "MG",
+            "SP"});
             this.cmbEstadoOrigem.Location = new System.Drawing.Point(95, 31);
             this.cmbEstadoOrigem.Name = "cmbEstadoOrigem";
-            this.cmbEstadoOrigem.Size = new System.Drawing.Size(939, 21);
+            this.cmbEstadoOrigem.Size = new System.Drawing.Size(215, 21);
             this.cmbEstadoOrigem.TabIndex = 4;
             // 
             // cmbEstadoDestino
             // 
             this.cmbEstadoDestino.FormattingEnabled = true;
             this.cmbEstadoDestino.Items.AddRange(new object[] {
-            "RJ",
-            "PE",
             "MG",
+            "PA",
             "PB",
-            "PR",
+            "PE",
             "PI",
+            "PR",
+            "RJ",
             "RO",
             "SE",
-            "TO",
-            "PA"});
+            "SP",
+            "TO"});
             this.cmbEstadoDestino.Location = new System.Drawing.Point(95, 58);
             this.cmbEstadoDestino.Name = "cmbEstadoDestino";
-            this.cmbEstadoDestino.Size = new System.Drawing.Size(939, 21);
+            this.cmbEstadoDestino.Size = new System.Drawing.Size(215, 21);
             this.cmbEstadoDestino.TabIndex = 5;
             // 
             // FormImposto

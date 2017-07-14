@@ -8,107 +8,35 @@ namespace Imposto.Core.Service
     {
         public NotaFiscal EmitirNotaFiscal(Pedido pedido)
         {
-            NotaFiscal notaFiscal = new NotaFiscal();
-
-            notaFiscal.NumeroNotaFiscal = 99999;
-            notaFiscal.Serie = new Random().Next(Int32.MaxValue);
-            notaFiscal.NomeCliente = pedido.NomeCliente;
-
-            notaFiscal.EstadoDestino = pedido.EstadoDestino;
-            notaFiscal.EstadoOrigem = pedido.EstadoOrigem;
+            NotaFiscal notaFiscal = new NotaFiscal
+            {
+                NumeroNotaFiscal = 99999,
+                Serie = new Random().Next(Int32.MaxValue),
+                NomeCliente = pedido.NomeCliente,
+                EstadoDestino = pedido.EstadoDestino,
+                EstadoOrigem = pedido.EstadoOrigem
+            };
 
             foreach (PedidoItem itemPedido in pedido.ItensDoPedido)
             {
                 NotaFiscalItem notaFiscalItem = new NotaFiscalItem();
-                if (notaFiscal.EstadoOrigem == "SP" && notaFiscal.EstadoDestino == "RJ")
+
+                //Recuperar o CFOP deacordo com os estados
+                DadosFiscais dadosFiscais = new DadosFiscais();
+                CategoriaFiscalEstado categoriaFiscal =
+                    dadosFiscais.ValoresFiscais(notaFiscal.EstadoOrigem, notaFiscal.EstadoDestino);
+                notaFiscalItem.Cfop = categoriaFiscal.Cfop;
+
+                //Desconto
+                double valorPedidoDesconto = itemPedido.ValorItemPedido;
+                notaFiscalItem.Desconto = 0;
+                if (ValidarRegiaoSudeste(notaFiscal.EstadoDestino))
                 {
-                    notaFiscalItem.Cfop = "6.000";
-                }
-                else if (notaFiscal.EstadoOrigem == "SP" && notaFiscal.EstadoDestino == "PE")
-                {
-                    notaFiscalItem.Cfop = "6.001";
-                }
-                else if (notaFiscal.EstadoOrigem == "SP" && notaFiscal.EstadoDestino == "MG")
-                {
-                    notaFiscalItem.Cfop = "6.002";
-                }
-                else if (notaFiscal.EstadoOrigem == "SP" && notaFiscal.EstadoDestino == "PB")
-                {
-                    notaFiscalItem.Cfop = "6.003";
-                }
-                else if (notaFiscal.EstadoOrigem == "SP" && notaFiscal.EstadoDestino == "PR")
-                {
-                    notaFiscalItem.Cfop = "6.004";
-                }
-                else if (notaFiscal.EstadoOrigem == "SP" && notaFiscal.EstadoDestino == "PI")
-                {
-                    notaFiscalItem.Cfop = "6.005";
-                }
-                else if (notaFiscal.EstadoOrigem == "SP" && notaFiscal.EstadoDestino == "RO")
-                {
-                    notaFiscalItem.Cfop = "6.006";
-                }
-                else if (notaFiscal.EstadoOrigem == "SP" && notaFiscal.EstadoDestino == "SE")
-                {
-                    notaFiscalItem.Cfop = "6.007";
-                }
-                else if (notaFiscal.EstadoOrigem == "SP" && notaFiscal.EstadoDestino == "TO")
-                {
-                    notaFiscalItem.Cfop = "6.008";
-                }
-                else if (notaFiscal.EstadoOrigem == "SP" && notaFiscal.EstadoDestino == "SE")
-                {
-                    notaFiscalItem.Cfop = "6.009";
-                }
-                else if (notaFiscal.EstadoOrigem == "SP" && notaFiscal.EstadoDestino == "PA")
-                {
-                    notaFiscalItem.Cfop = "6.010";
-                }
-                else if (notaFiscal.EstadoOrigem == "MG" && notaFiscal.EstadoDestino == "RJ")
-                {
-                    notaFiscalItem.Cfop = "6.000";
-                }
-                else if (notaFiscal.EstadoOrigem == "MG" && notaFiscal.EstadoDestino == "PE")
-                {
-                    notaFiscalItem.Cfop = "6.001";
-                }
-                else if (notaFiscal.EstadoOrigem == "MG" && notaFiscal.EstadoDestino == "MG")
-                {
-                    notaFiscalItem.Cfop = "6.002";
-                }
-                else if (notaFiscal.EstadoOrigem == "MG" && notaFiscal.EstadoDestino == "PB")
-                {
-                    notaFiscalItem.Cfop = "6.003";
-                }
-                else if (notaFiscal.EstadoOrigem == "MG" && notaFiscal.EstadoDestino == "PR")
-                {
-                    notaFiscalItem.Cfop = "6.004";
-                }
-                else if (notaFiscal.EstadoOrigem == "MG" && notaFiscal.EstadoDestino == "PI")
-                {
-                    notaFiscalItem.Cfop = "6.005";
-                }
-                else if (notaFiscal.EstadoOrigem == "MG" && notaFiscal.EstadoDestino == "RO")
-                {
-                    notaFiscalItem.Cfop = "6.006";
-                }
-                else if (notaFiscal.EstadoOrigem == "MG" && notaFiscal.EstadoDestino == "SE")
-                {
-                    notaFiscalItem.Cfop = "6.007";
-                }
-                else if (notaFiscal.EstadoOrigem == "MG" && notaFiscal.EstadoDestino == "TO")
-                {
-                    notaFiscalItem.Cfop = "6.008";
-                }
-                else if (notaFiscal.EstadoOrigem == "MG" && notaFiscal.EstadoDestino == "SE")
-                {
-                    notaFiscalItem.Cfop = "6.009";
-                }
-                else if (notaFiscal.EstadoOrigem == "MG" && notaFiscal.EstadoDestino == "PA")
-                {
-                    notaFiscalItem.Cfop = "6.010";
+                    valorPedidoDesconto = itemPedido.ValorItemPedido * 0.10; //Desconto regiao Sudeste
+                    notaFiscalItem.Desconto = 10;
                 }
 
+                //ICMS
                 if (notaFiscal.EstadoDestino == notaFiscal.EstadoOrigem)
                 {
                     notaFiscalItem.TipoIcms = "60";
@@ -120,26 +48,18 @@ namespace Imposto.Core.Service
                     notaFiscalItem.AliquotaIcms = 0.17;
                 }
 
-                double valorPedidoDesconto = itemPedido.ValorItemPedido;
-                notaFiscalItem.Desconto = 0;
-                if (ValidarRegiaoSudeste(notaFiscal.EstadoDestino))
-                {
-                    valorPedidoDesconto = itemPedido.ValorItemPedido * 0.10; //Desconto regiao Sudeste
-                    notaFiscalItem.Desconto = 10;
-                }
-
-                if (notaFiscalItem.Cfop == "6.009")
-                {
-                    notaFiscalItem.BaseIcms = valorPedidoDesconto * 0.90; //redução de base
-                }
-                else
-                {
-                    notaFiscalItem.BaseIcms = valorPedidoDesconto;
-                }
+                notaFiscalItem.BaseIcms = notaFiscalItem.Cfop == "6.009"
+                    ? valorPedidoDesconto * 0.90
+                    : valorPedidoDesconto;
 
                 notaFiscalItem.ValorIcms = notaFiscalItem.BaseIcms * notaFiscalItem.AliquotaIcms;
-                notaFiscalItem.BaseIpi = valorPedidoDesconto;
 
+                //IPI
+                notaFiscalItem.BaseIpi = valorPedidoDesconto;
+                notaFiscalItem.AliquotaIpi = 0.10;
+                notaFiscalItem.ValorIpi = notaFiscalItem.BaseIpi * notaFiscalItem.AliquotaIpi;
+
+                //Brinde
                 if (itemPedido.Brinde)
                 {
                     notaFiscalItem.TipoIcms = "60";
@@ -148,11 +68,8 @@ namespace Imposto.Core.Service
                     notaFiscalItem.AliquotaIpi = 0;
                     notaFiscalItem.ValorIpi = notaFiscalItem.BaseIpi * notaFiscalItem.AliquotaIpi;
                 }
-                else
-                {
-                    notaFiscalItem.AliquotaIpi = 0.10;
-                    notaFiscalItem.ValorIpi = notaFiscalItem.BaseIpi * notaFiscalItem.AliquotaIpi;
-                }
+
+                //Produtos
                 notaFiscalItem.NomeProduto = itemPedido.NomeProduto;
                 notaFiscalItem.CodigoProduto = itemPedido.CodigoProduto;
 
@@ -162,11 +79,11 @@ namespace Imposto.Core.Service
             return notaFiscal;
         }
 
-        public Boolean ValidarRegiaoSudeste(string EstadoDestino)
+        private Boolean ValidarRegiaoSudeste(string estadoDestino)
         {
-            List<String> sudeste = new List<string> { "SP", "SP", "RJ", "ES", "MG" };
+            List<String> sudeste = new List<string> {"SP", "RJ", "ES", "MG"};
 
-            return sudeste.Contains(EstadoDestino);
+            return sudeste.Contains(estadoDestino);
         }
     }
 }

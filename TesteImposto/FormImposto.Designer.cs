@@ -32,11 +32,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxNomeCliente = new System.Windows.Forms.TextBox();
-            this.txtEstadoOrigem = new System.Windows.Forms.TextBox();
-            this.txtEstadoDestino = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewPedidos = new System.Windows.Forms.DataGridView();
             this.buttonGerarNotaFiscal = new System.Windows.Forms.Button();
+            this.cmbEstadoOrigem = new System.Windows.Forms.ComboBox();
+            this.cmbEstadoDestino = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPedidos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,24 +69,10 @@
             // 
             // textBoxNomeCliente
             // 
-            this.textBoxNomeCliente.Location = new System.Drawing.Point(95, 9);
+            this.textBoxNomeCliente.Location = new System.Drawing.Point(95, 6);
             this.textBoxNomeCliente.Name = "textBoxNomeCliente";
             this.textBoxNomeCliente.Size = new System.Drawing.Size(939, 20);
             this.textBoxNomeCliente.TabIndex = 3;
-            // 
-            // txtEstadoOrigem
-            // 
-            this.txtEstadoOrigem.Location = new System.Drawing.Point(95, 31);
-            this.txtEstadoOrigem.Name = "txtEstadoOrigem";
-            this.txtEstadoOrigem.Size = new System.Drawing.Size(939, 20);
-            this.txtEstadoOrigem.TabIndex = 4;
-            // 
-            // txtEstadoDestino
-            // 
-            this.txtEstadoDestino.Location = new System.Drawing.Point(95, 53);
-            this.txtEstadoDestino.Name = "txtEstadoDestino";
-            this.txtEstadoDestino.Size = new System.Drawing.Size(939, 20);
-            this.txtEstadoDestino.TabIndex = 5;
             // 
             // label4
             // 
@@ -116,16 +102,46 @@
             this.buttonGerarNotaFiscal.UseVisualStyleBackColor = true;
             this.buttonGerarNotaFiscal.Click += new System.EventHandler(this.buttonGerarNotaFiscal_Click);
             // 
+            // cmbEstadoOrigem
+            // 
+            this.cmbEstadoOrigem.FormattingEnabled = true;
+            this.cmbEstadoOrigem.Items.AddRange(new object[] {
+            "SP",
+            "MG"});
+            this.cmbEstadoOrigem.Location = new System.Drawing.Point(95, 31);
+            this.cmbEstadoOrigem.Name = "cmbEstadoOrigem";
+            this.cmbEstadoOrigem.Size = new System.Drawing.Size(939, 21);
+            this.cmbEstadoOrigem.TabIndex = 4;
+            // 
+            // cmbEstadoDestino
+            // 
+            this.cmbEstadoDestino.FormattingEnabled = true;
+            this.cmbEstadoDestino.Items.AddRange(new object[] {
+            "RJ",
+            "PE",
+            "MG",
+            "PB",
+            "PR",
+            "PI",
+            "RO",
+            "SE",
+            "TO",
+            "PA"});
+            this.cmbEstadoDestino.Location = new System.Drawing.Point(95, 58);
+            this.cmbEstadoDestino.Name = "cmbEstadoDestino";
+            this.cmbEstadoDestino.Size = new System.Drawing.Size(939, 21);
+            this.cmbEstadoDestino.TabIndex = 5;
+            // 
             // FormImposto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1043, 477);
+            this.Controls.Add(this.cmbEstadoDestino);
+            this.Controls.Add(this.cmbEstadoOrigem);
             this.Controls.Add(this.buttonGerarNotaFiscal);
             this.Controls.Add(this.dataGridViewPedidos);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtEstadoDestino);
-            this.Controls.Add(this.txtEstadoOrigem);
             this.Controls.Add(this.textBoxNomeCliente);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -144,11 +160,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxNomeCliente;
-        private System.Windows.Forms.TextBox txtEstadoOrigem;
-        private System.Windows.Forms.TextBox txtEstadoDestino;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dataGridViewPedidos;
         private System.Windows.Forms.Button buttonGerarNotaFiscal;
+        private System.Windows.Forms.ComboBox cmbEstadoOrigem;
+        private System.Windows.Forms.ComboBox cmbEstadoDestino;
     }
 }
 

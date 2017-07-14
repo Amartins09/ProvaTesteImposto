@@ -124,6 +124,7 @@ namespace Imposto.Core.Domain
                 {
                     notaFiscalItem.Cfop = "6.010";
                 }
+
                 if (this.EstadoDestino == this.EstadoOrigem)
                 {
                     notaFiscalItem.TipoIcms = "60";
@@ -143,12 +144,20 @@ namespace Imposto.Core.Domain
                     notaFiscalItem.BaseIcms = itemPedido.ValorItemPedido;
                 }
                 notaFiscalItem.ValorIcms = notaFiscalItem.BaseIcms*notaFiscalItem.AliquotaIcms;
+                notaFiscalItem.BaseIpi = itemPedido.ValorItemPedido;
 
                 if (itemPedido.Brinde)
                 {
                     notaFiscalItem.TipoIcms = "60";
                     notaFiscalItem.AliquotaIcms = 0.18;
                     notaFiscalItem.ValorIcms = notaFiscalItem.BaseIcms * notaFiscalItem.AliquotaIcms;
+                    notaFiscalItem.AliquotaIpi = 0;
+                    notaFiscalItem.ValorIpi = notaFiscalItem.BaseIpi * notaFiscalItem.AliquotaIpi;
+                }
+                else
+                {
+                    notaFiscalItem.AliquotaIpi = 0.10;
+                    notaFiscalItem.ValorIpi = notaFiscalItem.BaseIpi * notaFiscalItem.AliquotaIpi;
                 }
                 notaFiscalItem.NomeProduto = itemPedido.NomeProduto;
                 notaFiscalItem.CodigoProduto = itemPedido.CodigoProduto;

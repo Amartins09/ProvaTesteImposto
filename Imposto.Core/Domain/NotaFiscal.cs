@@ -135,16 +135,26 @@ namespace Imposto.Core.Domain
                     notaFiscalItem.TipoIcms = "10";
                     notaFiscalItem.AliquotaIcms = 0.17;
                 }
+
+                double valorPedidoDesconto = itemPedido.ValorItemPedido;
+                notaFiscalItem.Desconto = 0;
+                if (ValidarRegiaoSudeste())
+                {
+                    valorPedidoDesconto = itemPedido.ValorItemPedido * 0.10; //Desconto regiao Sudeste
+                    notaFiscalItem.Desconto = 10;
+                }
+
                 if (notaFiscalItem.Cfop == "6.009")
                 {
-                    notaFiscalItem.BaseIcms = itemPedido.ValorItemPedido*0.90; //redução de base
+                    notaFiscalItem.BaseIcms = valorPedidoDesconto*0.90; //redução de base
                 }
                 else
                 {
-                    notaFiscalItem.BaseIcms = itemPedido.ValorItemPedido;
+                    notaFiscalItem.BaseIcms = valorPedidoDesconto;
                 }
+
                 notaFiscalItem.ValorIcms = notaFiscalItem.BaseIcms*notaFiscalItem.AliquotaIcms;
-                notaFiscalItem.BaseIpi = itemPedido.ValorItemPedido;
+                notaFiscalItem.BaseIpi = valorPedidoDesconto;
 
                 if (itemPedido.Brinde)
                 {
@@ -164,6 +174,13 @@ namespace Imposto.Core.Domain
 
                 ItensDaNotaFiscal.Add(notaFiscalItem);
             }            
+        }
+
+        public Boolean ValidarRegiaoSudeste()
+        {
+            List<String> sudeste = new List<string> {"SP", "SP", "RJ", "ES", "MG"};
+
+            return sudeste.Contains(EstadoDestino);
         }
     }
 }

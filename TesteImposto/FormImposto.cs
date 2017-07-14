@@ -65,11 +65,21 @@ namespace TesteImposto
             {
                 service.GerarNotaFiscal(pedido);
                 MessageBox.Show("Operação efetuada com sucesso");
+                limparTela();
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
+        }
+
+        private void limparTela()
+        {
+            textBoxNomeCliente.Text = String.Empty;
+            txtEstadoOrigem.Text = String.Empty;
+            txtEstadoDestino.Text = String.Empty;
+            dataGridViewPedidos.DataSource = GetTablePedidos();
+            ResizeColumns();
         }
     }
 }

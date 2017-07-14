@@ -8,13 +8,15 @@ namespace Imposto.Core.Service
 {
     public class NotaFiscalService
     {
-        public void GerarNotaFiscal(Pedido pedido)
+        public NotaFiscal GerarNotaFiscal(Pedido pedido)
         {
             PedidoService pedidoService = new PedidoService();
             NotaFiscal notaFiscal = pedidoService.EmitirNotaFiscal(pedido);
             GravarXmlNotaFiscal(notaFiscal);
             NotaFiscalRepository repository = new NotaFiscalRepository();
-            repository.SalvarNotaFiscal(notaFiscal);
+            notaFiscal = repository.SalvarNotaFiscal(notaFiscal);
+
+            return notaFiscal;
         }
 
         private void GravarXmlNotaFiscal(NotaFiscal notaFiscal)

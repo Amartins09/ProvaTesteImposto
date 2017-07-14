@@ -8,7 +8,7 @@ namespace Imposto.Core.Data
 {
     public class NotaFiscalRepository
     {
-        public void SalvarNotaFiscal(NotaFiscal notaFiscal)
+        public NotaFiscal SalvarNotaFiscal(NotaFiscal notaFiscal)
         {
             String connStr = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
 
@@ -64,6 +64,7 @@ namespace Imposto.Core.Data
                     }
 
                     transaction.Commit();
+                    return notaFiscal;
                 }
                 catch (Exception e)
                 {

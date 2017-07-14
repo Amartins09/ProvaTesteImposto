@@ -30,8 +30,8 @@ namespace Imposto.Core.Domain
             this.Serie = new Random().Next(Int32.MaxValue);
             this.NomeCliente = pedido.NomeCliente;
 
-            this.EstadoDestino = pedido.EstadoOrigem;
-            this.EstadoOrigem = pedido.EstadoDestino;
+            this.EstadoDestino = pedido.EstadoDestino;
+            this.EstadoOrigem = pedido.EstadoOrigem;
 
             foreach (PedidoItem itemPedido in pedido.ItensDoPedido)
             {

@@ -3,7 +3,7 @@
 Reporte Técnico
 
 # Alterações realizadas:
-•	Ajuste na tela para utilizar comboBox no lugar dos text para selecionar os estados de origem e destino para gerar as notas.
+•	Ajuste na tela para utilizar comboBox no lugar dos text para selecionar os estados de origem e destino para gerar as notas.<br>
 •	Tratamento nos itens do grid e campos da tela.
 •	Gravar as informações da nota fiscal em XML.
 •	Tratamento e correção nos cálculos dos impostos, inclusão do calculo de IPI e desconto para região sudeste.

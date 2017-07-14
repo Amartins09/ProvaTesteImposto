@@ -43,7 +43,7 @@ namespace Imposto.Core.Domain
         public CategoriaFiscalEstado ValoresFiscais(string estadoOrigem, string estadoDestino)
         {
             CategoriaFiscalEstado categoria =
-                _dados.First(x => x.EstadoOrigen.Equals(estadoOrigem) && x.EstadoDestino.Equals(estadoDestino));
+                _dados.FirstOrDefault(x => x.EstadoDestino.Equals(estadoDestino) && x.EstadoOrigen.Equals(estadoOrigem));
 
             if (categoria == null)
                 throw new Exception("Não foi localizado uma categoria fiscal para esses estados");

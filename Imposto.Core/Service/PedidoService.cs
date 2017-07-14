@@ -4,7 +4,7 @@ using Imposto.Core.Domain;
 
 namespace Imposto.Core.Service
 {
-    class PedidoService
+    public class PedidoService
     {
         public NotaFiscal EmitirNotaFiscal(Pedido pedido)
         {
@@ -32,7 +32,7 @@ namespace Imposto.Core.Service
                 notaFiscalItem.Desconto = 0;
                 if (ValidarRegiaoSudeste(notaFiscal.EstadoDestino))
                 {
-                    valorPedidoDesconto = itemPedido.ValorItemPedido * 0.10; //Desconto regiao Sudeste
+                    valorPedidoDesconto = itemPedido.ValorItemPedido * 0.90; //Desconto regiao Sudeste
                     notaFiscalItem.Desconto = 10;
                 }
 
@@ -65,8 +65,9 @@ namespace Imposto.Core.Service
                     notaFiscalItem.TipoIcms = "60";
                     notaFiscalItem.AliquotaIcms = 0.18;
                     notaFiscalItem.ValorIcms = notaFiscalItem.BaseIcms * notaFiscalItem.AliquotaIcms;
+                    notaFiscalItem.BaseIpi = 0;
                     notaFiscalItem.AliquotaIpi = 0;
-                    notaFiscalItem.ValorIpi = notaFiscalItem.BaseIpi * notaFiscalItem.AliquotaIpi;
+                    notaFiscalItem.ValorIpi = 0;
                 }
 
                 //Produtos

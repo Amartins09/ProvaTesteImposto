@@ -41,12 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\NotaFiscalRepository.cs" />
+    <Compile Include="Domain\CategoriaFiscalEstado.cs" />
+    <Compile Include="Domain\DadosFiscais.cs" />
     <Compile Include="Domain\NotaFiscal.cs" />
     <Compile Include="Domain\NotaFiscalItem.cs" />
     <Compile Include="Domain\Pedido.cs" />
     <Compile Include="Domain\PedidoItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\NotaFiscalService.cs" />
+    <Compile Include="Service\PedidoService.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

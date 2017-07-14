@@ -22,6 +22,9 @@ CREATE PROCEDURE P_NOTA_FISCAL_ITEM
     @pBaseIcms decimal(18,5),
     @pAliquotaIcms decimal(18,5),
     @pValorIcms decimal(18,5),
+	@pBaseIpi decimal(18,5),
+    @pAliquotaIpi decimal(18,5),
+    @pValorIpi decimal(18,5),
     @pNomeProduto varchar(50),
     @pCodigoProduto varchar(20)
 )
@@ -37,7 +40,10 @@ BEGIN
            ,[AliquotaIcms]
            ,[ValorIcms]
            ,[NomeProduto]
-           ,[CodigoProduto])
+           ,[CodigoProduto]
+		   ,[BaseIpi]
+		   ,[AliquotaIpi]
+		   ,[ValorIpi])
 		VALUES
            (@pIdNotaFiscal,
 			@pCfop,
@@ -46,7 +52,10 @@ BEGIN
 			@pAliquotaIcms,
 			@pValorIcms,
 			@pNomeProduto,
-			@pCodigoProduto)
+			@pCodigoProduto,
+			@pBaseIpi,
+			@pAliquotaIpi,
+			@pValorIpi)
 
 		SET @pId = @@IDENTITY
 	END
@@ -61,6 +70,9 @@ BEGIN
 			,[ValorIcms] = @pValorIcms
 			,[NomeProduto] = @pNomeProduto
 			,[CodigoProduto] = @pCodigoProduto
+			,[BaseIpi] = @pBaseIpi
+		    ,[AliquotaIpi] = @pAliquotaIpi
+		    ,[ValorIpi] = @pValorIpi
 		 WHERE Id = @pId
 	END	    
 END

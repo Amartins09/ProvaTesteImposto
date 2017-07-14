@@ -8,6 +8,7 @@ namespace Imposto.Core.Domain
     {
         [XmlIgnore]
         public int Id { get; set; }
+        [XmlIgnore]
         public int IdNotaFiscal { get; set; }
         public string Cfop { get; set; }
         public string TipoIcms { get; set; }
@@ -16,5 +17,8 @@ namespace Imposto.Core.Domain
         public double ValorIcms { get; set; }
         public string NomeProduto { get; set; }
         public string CodigoProduto { get; set; }
+        public double BaseIpi { get; set; }
+        public double AliquotaIpi { get; set; }
+        public double ValorIpi { get; set; }
     }
 }

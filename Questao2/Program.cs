@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ValidarStream
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {

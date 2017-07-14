@@ -1,6 +1,6 @@
 ﻿namespace ValidarStream
 {
-    class ValidarString: IStream
+    public class ValidarString: IStream
     {
         private string _input;
         private int i;

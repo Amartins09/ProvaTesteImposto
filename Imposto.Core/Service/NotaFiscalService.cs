@@ -10,14 +10,14 @@ namespace Imposto.Core.Service
     {
         public void GerarNotaFiscal(Pedido pedido)
         {
-            NotaFiscal notaFiscal = new NotaFiscal();
-            notaFiscal.EmitirNotaFiscal(pedido);
-            GravarNotaFiscal(notaFiscal);
+            PedidoService pedidoService = new PedidoService();
+            NotaFiscal notaFiscal = pedidoService.EmitirNotaFiscal(pedido);
+            GravarXmlNotaFiscal(notaFiscal);
             NotaFiscalRepository repository = new NotaFiscalRepository();
-            repository.SaveNotaFiscal(notaFiscal);
+            repository.SalvarNotaFiscal(notaFiscal);
         }
 
-        private void GravarNotaFiscal(NotaFiscal notaFiscal)
+        private void GravarXmlNotaFiscal(NotaFiscal notaFiscal)
         {
             String path = Environment.GetEnvironmentVariable("pathXml");
             if (string.Equals(path, null))

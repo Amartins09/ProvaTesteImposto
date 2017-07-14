@@ -8,7 +8,7 @@ namespace Imposto.Core.Data
 {
     public class NotaFiscalRepository
     {
-        public void SaveNotaFiscal(NotaFiscal notaFiscal)
+        public void SalvarNotaFiscal(NotaFiscal notaFiscal)
         {
             String connStr = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
 
